@@ -7,7 +7,7 @@ const t = babel.types;
 
 const PlaceholderThatNeverCollides = "__restyled_placeholder";
 
-const RestyledComponentsPlugin = ({ variables, functions }) => {
+const RestyledComponentsPlugin = ({ variables = {}, functions = {} }) => {
   const memoizedRestyleToken = memoize(
     (x) => {
       if (!isNil(variables[x])) {
@@ -26,7 +26,21 @@ const RestyledComponentsPlugin = ({ variables, functions }) => {
 
   const restyleValue = (value) => {
     if (typeof value === "string") {
-      return value.split(" ").map(memoizedRestyleToken).join(" ");
+      const tokens = stylis.tokenize(value);
+      return tokens
+        .reduce(
+          (prev, current) => {
+            if (current === " ") {
+              prev.push("");
+            } else {
+              prev[prev.length - 1] += current;
+            }
+            return prev;
+          },
+          [""]
+        )
+        .map(memoizedRestyleToken)
+        .join(" ");
     }
 
     return value;
