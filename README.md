@@ -44,6 +44,12 @@ const Container = styled.View`
   color: primary;
   background: secondary;
 `;
+
+/* will be transpiled into:
+
+color: red;
+background: blue;
+*/
 ```
 
 **Functions**
@@ -62,4 +68,9 @@ export const functions = {
 const Container = styled.View`
   width: pow(2px);
 `;
+
+/* will be transpiled into:
+
+width: 4px;
+*/
 ```
