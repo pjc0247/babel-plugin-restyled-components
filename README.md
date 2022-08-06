@@ -1,30 +1,42 @@
-babel-plugin-static-glob
-====
+# babel-plugin-restyled-components
 
-Installation
-----
+## Installation
+
 ```
-yarn add babel-plugin-static-glob
+yarn add babel-plugin-restyled-components
 ```
 
-Usage
-----
+## Usage
+
+**Variables**
 
 ```tsx
-__glob('**/*.js').map(x => console.log(x));
+export const variables = {
+  primary: "red",
+  secondary: "blue",
+};
 ```
 
-will be transpiled into:
-
-```
-[
-  './src/index.js',
-  './src/App.js',
-  './src/component/TestComponent.js',
-  './src/page/LoginPage.js',
-].map(x => console.log(x));
+```tsx
+const Container = styled.View`
+  color: primary;
+  background: secondary;
+`;
 ```
 
-Glob Patterns & Options
-----
-https://github.com/isaacs/node-glob
+**Functions**
+
+```tsx
+export const functions = {
+  pow: (input) => {
+    const n = input.split("px")[0];
+    return `${Math.pow(n, 2)}px`;
+  },
+};
+```
+
+```tsx
+const Container = styled.View`
+  width: pow(2px);
+`;
+```
