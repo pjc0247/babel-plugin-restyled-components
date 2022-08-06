@@ -1,5 +1,5 @@
 {
-  "name": "babel-plugin-static-glob",
+  "name": "babel-plugin-restyled-components",
   "version": "0.1.1",
   "scripts": {
     "test": "node testbed/index.js"

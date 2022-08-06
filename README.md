@@ -8,9 +8,31 @@ yarn add babel-plugin-restyled-components
 
 ## Usage
 
+```js
+// babel.config.js
+{
+  /* ... */
+  plugins: [
+    RestyledComponentsPlugin(require("./variables")),
+    /*
+    RestyledComponentsPlugin({
+      variables: {
+        dark: 'black',
+      },
+      function: {
+        hello: () => 'red',
+      }
+    }),
+    */
+  ],
+  /* ... */
+}
+```
+
 **Variables**
 
 ```tsx
+// variables.js
 export const variables = {
   primary: "red",
   secondary: "blue",
@@ -27,6 +49,7 @@ const Container = styled.View`
 **Functions**
 
 ```tsx
+// variables.js
 export const functions = {
   pow: (input) => {
     const n = input.split("px")[0];

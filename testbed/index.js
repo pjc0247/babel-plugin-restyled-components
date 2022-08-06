@@ -1,5 +1,5 @@
 const babel = require("@babel/core");
-const staticGlob = require("../index").default;
+const RestyledComponentsPlugin = require("../index").default;
 
 const before = `
 import styled from 'styled-components';
@@ -26,10 +26,11 @@ const B = styled.view\`
   }
 \`;
 `;
+
 const after = babel.transformSync(before, {
   filename: "index.js",
   presets: [],
-  plugins: [staticGlob()],
+  plugins: [RestyledComponentsPlugin(require("./variables"))],
 }).code;
 
 console.log(after);
