@@ -5,6 +5,8 @@ const babel = require("@babel/core");
 
 const t = babel.types;
 
+const PlaceholderThatNeverCollides = "__restyled_placeholder";
+
 const RestyledComponentsPlugin = ({ variables, functions }) => {
   const memoizedRestyleToken = memoize(
     (x) => {
@@ -54,16 +56,18 @@ const RestyledComponentsPlugin = ({ variables, functions }) => {
         const objectName = get(path.node, "tag.object.name");
         const quasi = get(path.node, "quasi.quasis")
           .map((x) => x.value.cooked)
-          .join("__placeholder");
+          .join(PlaceholderThatNeverCollides);
 
         if (objectName === "styled") {
           const restyledCSS = restyleCSS(quasi);
-          const quasis = restyledCSS.split("__placeholder").map((x) =>
-            t.templateElement({
-              raw: x,
-              cooked: x,
-            })
-          );
+          const quasis = restyledCSS
+            .split(PlaceholderThatNeverCollides)
+            .map((x) =>
+              t.templateElement({
+                raw: x,
+                cooked: x,
+              })
+            );
 
           path.node.quasi = t.templateLiteral(
             quasis,
