@@ -14,9 +14,12 @@ const RestyledComponentsPlugin = ({ variables = {}, functions = {} }) => {
         return variables[x];
       }
 
-      const [_, ident] = /^([a-zA-Z0-9_]*)\(/.exec(x) ?? [];
+      const [_, ident, args] = /^([a-zA-Z0-9_]*)\((.*)\)$/.exec(x) ?? [];
       if (!isNil(ident) && !isNil(functions[ident])) {
-        return functions[ident](x);
+        return functions[ident](
+          stylis.tokenize(args).filter((x) => x !== " "),
+          args
+        );
       }
 
       return x;

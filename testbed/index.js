@@ -11,7 +11,7 @@ const B = css\`
   .v { 
     font-size: 12px;
 
-    color: \${({ aa }) => \`red\`};
+    color: myrgb(255, 255,255);
 
     \${({ bb }) => \`
       font-size: \${bb};
