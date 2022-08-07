@@ -5,7 +5,7 @@ const before = `
 import styled from 'styled-components';
 
 
-const B = styled.view\`
+const B = css\`
   font-size: 12px;
 
   .v { 

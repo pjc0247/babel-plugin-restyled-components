@@ -67,12 +67,13 @@ const RestyledComponentsPlugin = ({ variables = {}, functions = {} }) => {
   return {
     visitor: {
       TaggedTemplateExpression(path, { file }) {
+        const tagName = get(path.node, "tag.name");
         const objectName = get(path.node, "tag.object.name");
         const quasi = get(path.node, "quasi.quasis")
           .map((x) => x.value.cooked)
           .join(PlaceholderThatNeverCollides);
 
-        if (objectName === "styled") {
+        if (objectName === "styled" || tagName === "css") {
           const restyledCSS = restyleCSS(quasi);
           const quasis = restyledCSS
             .split(PlaceholderThatNeverCollides)
