@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-yarn add babel-plugin-restyled-components
+yarn add --dev babel-plugin-restyled-components
 ```
 
 ## Usage
